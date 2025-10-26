@@ -9,12 +9,13 @@
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
   </head>
   <body>
-    <div id="app" class="h-screen flex flex-col justify-center items-center dark:text-white dark:bg-zinc-800">
-        <h1 class="text-2xl sm:text-4xl md:text-5xl font-bold">[ HANGMAN GAME ]</h1>
+    <div id="app">
+        <div class="absolute top-6 right-6">
+            <input id="toggleDarkMode" type="checkbox" />
+        </div>
+        <h1 class="logo">[ HANGMAN GAME ]</h1>
         <div id="game" class="mt-10 flex flex-col items-center">
-            <button id = "startGame" class="bg-slate-200 dark:bg-indigo-500 dark:hover:bg-indigo-600
-            hover:bg-slate-300 rounded-md font-medium px-5
-            py-2">Start game</button>
+            <button id = "startGame" class="button-primary">Start game</button>
         </div>
     </div>
     <script type="module" src="./src/js/main.js"></script>
