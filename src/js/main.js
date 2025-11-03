@@ -1,7 +1,9 @@
 import '../css/style.css'
+import {darkModeHandle} from "./utils.js";
+darkModeHandle()
 
-const darkModeSwitcher = document.getElementById('toggleDarkMode')
-darkModeSwitcher.addEventListener('input', () => {
-    const htmlElement = document.documentElement
-    htmlElement.classList.toggle('dark')
+
+const startGameButton = document.getElementById('startGame')
+startGameButton.addEventListener('click', () => {
+    console.log('Start game')
 })
