@@ -10,15 +10,25 @@ const createPlaceHolderHTML = () => {
     return `<div id="placeholders" class="placeholders-wrapper">${placeholdersHTML}</div>`
 }
 
+const createKeyboard = () => {
+    const keyboard = document.createElement('div');
+    keyboard.classList.add('keyboard')
+    keyboard.id = 'keyboard'
+
+    const keyboardHTML = KEYBOARD_LETTERS.reduce((acc, curr) => {
+        return acc + `<button class="button-primary" id="${curr}">${curr}</button>`
+    }, '')
+
+    keyboard.innerHTML = keyboardHTML;
+    return keyboard
+}
+
 export const startGame = () => {
     const randomIndex = Math.floor(Math.random() * WORDS.length);
     const wordToGuess = WORDS[randomIndex]
     sessionStorage.setItem("word", wordToGuess);
 
-    let placeholderHTML = ''
-    for (let i = 0; i < wordToGuess.length; i++) {
-        placeholderHTML = placeholderHTML + `<h1 id="letter_${i}" class="letter">_</h1>`
-    }
-
     gameDiv.innerHTML = createPlaceHolderHTML()
+    const keyboardDiv = createKeyboard()
+    gameDiv.appendChild(keyboardDiv)
 }
