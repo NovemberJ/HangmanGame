@@ -1,15 +1,13 @@
-import {WORDS} from "./consts.js";
+import {WORDS, KEYBOARD_LETTERS} from "./consts.js";
 
 const gameDiv= document.getElementById("game")
 
 const createPlaceHolderHTML = () => {
-    const word = sessionStorage.getItem('word')
-    let placeholderHTML = ''
-    for (let i = 0; i < word.length; i++) {
-        placeholderHTML = placeholderHTML + `<h1 id="letter_${i}" class="letter">_</h1>`
-    }
-
-    return `<div id="placeholders" class="placeholders-wrapper">${placeholderHTML}</div>`
+    const word = sessionStorage.getItem('word');
+    const wordArray = Array.from(word);
+    const placeholdersHTML = wordArray.reduce((acc, curr, i) => acc + `<h1 id="letter_${i}"
+    class="letter">_</h1>`, '')
+    return `<div id="placeholders" class="placeholders-wrapper">${placeholdersHTML}</div>`
 }
 
 export const startGame = () => {
