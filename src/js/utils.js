@@ -1,21 +1,21 @@
 export const darkModeHandle = () => {
-    const darkModeSwitcher = document.getElementById('toggleDarkMode')
-    const htmlElement = document.documentElement
+  const darkModeSwitcher = document.getElementById("toggleDarkMode");
+  const htmlElement = document.documentElement;
 
-    if (localStorage.getItem('mode') === 'dark'){
-        htmlElement.classList.add('dark')
-        darkModeSwitcher.checked = true
-    }else{
-        htmlElement.classList.remove('dark')
+  if (localStorage.getItem("mode") === "dark") {
+    htmlElement.classList.add("dark");
+    darkModeSwitcher.checked = true;
+  } else {
+    htmlElement.classList.remove("dark");
+  }
+
+  darkModeSwitcher.addEventListener("input", () => {
+    htmlElement.classList.toggle("dark");
+
+    if (htmlElement.classList.contains("dark")) {
+      localStorage.setItem("mode", "dark");
+    } else {
+      localStorage.setItem("mode", "light");
     }
-
-    darkModeSwitcher.addEventListener('input', () => {
-        htmlElement.classList.toggle('dark')
-
-        if (htmlElement.classList.contains('dark')){
-            localStorage.setItem('mode', 'dark')
-        } else {
-            localStorage.setItem('mode', 'light')
-        }
-    })
-}
+  });
+};
