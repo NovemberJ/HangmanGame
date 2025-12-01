@@ -38,7 +38,7 @@
   }
 
   .logo-sm {
-    @apply text-xl;
+    @apply text-xl sm:text-xl md:text-xl font-bold;
   }
 
   .button-primary {

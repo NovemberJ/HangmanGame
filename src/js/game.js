@@ -42,6 +42,8 @@ const createHangmanImg = () => {
 };
 
 export const startGame = () => {
+  const bigLogo = document.getElementById("logo");
+  if (bigLogo) bigLogo.style.display = "none";
   logoH1.classList.add("logo-sm");
   logoH1.textContent = "[ HANGMAN GAME ]";
   const randomIndex = Math.floor(Math.random() * WORDS.length);
@@ -60,7 +62,7 @@ export const startGame = () => {
 
   const hangmanImg = createHangmanImg();
 
-  gameDiv.prepend(logoH1);
   gameDiv.prepend(hangmanImg);
+  gameDiv.prepend(logoH1);
   gameDiv.appendChild(keyboardDiv);
 };
