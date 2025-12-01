@@ -3,6 +3,8 @@ import { WORDS, KEYBOARD_LETTERS } from "./consts.js";
 const gameDiv = document.getElementById("game");
 const logoH1 = document.createElement("h1");
 
+let triesLeft = 10;
+
 const createPlaceHolderHTML = () => {
   const word = sessionStorage.getItem("word");
   const wordArray = Array.from(word);
@@ -34,11 +36,24 @@ const createKeyboard = () => {
 
 const createHangmanImg = () => {
   const image = document.createElement("img");
-  image.src = "images/hg-5.png";
+  image.src = "images/hg-0.png";
   image.alt = "hangman image";
   image.classList.add("hangman-img");
   image.id = "hangman-img";
   return image;
+};
+
+const checkLetter = (letter) => {
+  const word = sessionStorage.getItem("word");
+  const inputLetter = letter.toLowerCase();
+  if (!word.includes(inputLetter)) {
+    const triesCounter = document.getElementById("tries-left");
+    triesLeft -= 1;
+    triesCounter.innerText = triesLeft;
+
+    const hangmanImg = document.getElementById("hangman-img");
+    hangmanImg.src = `images/hg-${10 - triesLeft}.png`;
+  }
 };
 
 export const startGame = () => {
@@ -57,7 +72,9 @@ export const startGame = () => {
 
   const keyboardDiv = createKeyboard();
   keyboardDiv.addEventListener("click", (event) => {
-    console.log(event.target.id);
+    if (event.target.tagName.toLowerCase() === "button") {
+      checkLetter(event.target.id);
+    }
   });
 
   const hangmanImg = createHangmanImg();
