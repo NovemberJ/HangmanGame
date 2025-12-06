@@ -53,6 +53,14 @@ const checkLetter = (letter) => {
 
     const hangmanImg = document.getElementById("hangman-img");
     hangmanImg.src = `images/hg-${10 - triesLeft}.png`;
+  } else {
+    const wordArray = Array.from(word);
+    wordArray.forEach((currentLetter, i) => {
+      if (currentLetter === inputLetter) {
+        document.getElementById(`letter_${i}`).innerText =
+          inputLetter.toUpperCase();
+      }
+    });
   }
 };
 
@@ -73,6 +81,7 @@ export const startGame = () => {
   const keyboardDiv = createKeyboard();
   keyboardDiv.addEventListener("click", (event) => {
     if (event.target.tagName.toLowerCase() === "button") {
+      event.target.disabled = true;
       checkLetter(event.target.id);
     }
   });
