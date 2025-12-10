@@ -64,6 +64,27 @@ const checkLetter = (letter) => {
   }
 };
 
+const stopGame = (status) => {
+  document.getElementById("placeholders").remove();
+  document.getElementById("tries").remove();
+  document.getElementById("keyboard").remove();
+
+  const word = sessionStorage.getItem("word");
+
+  if (status === "win") {
+    document.getElementById("hangman-img").src = "images/hg-win.png";
+    document.getElementById("game").innerHTML +=
+      "<h2 class='result-header win'>You won!</h2>";
+  } else if (status === "lose") {
+    document.getElementById("game").innerHTML +=
+      "<h2 class='result-header lose'>You lost :(</h2>";
+  }
+
+  document.getElementById("game").innerHTML +=
+    `<p>The word was: <span class="result">${word}</span></p><button id="play-again"
+    class="button-primary px-5 py-2 mt-3">Play again</button>`;
+};
+
 export const startGame = () => {
   const bigLogo = document.getElementById("logo");
   if (bigLogo) bigLogo.style.display = "none";
