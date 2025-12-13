@@ -3,7 +3,8 @@ import { WORDS, KEYBOARD_LETTERS } from "./consts.js";
 const gameDiv = document.getElementById("game");
 const logoH1 = document.createElement("h1");
 
-let triesLeft = 10;
+let triesLeft;
+let winCount;
 
 const createPlaceHolderHTML = () => {
   const word = sessionStorage.getItem("word");
@@ -53,10 +54,19 @@ const checkLetter = (letter) => {
 
     const hangmanImg = document.getElementById("hangman-img");
     hangmanImg.src = `images/hg-${10 - triesLeft}.png`;
+
+    if (triesLeft === 0) {
+      stopGame("lose");
+    }
   } else {
     const wordArray = Array.from(word);
     wordArray.forEach((currentLetter, i) => {
       if (currentLetter === inputLetter) {
+        winCount += 1;
+        if (winCount === word.length) {
+          stopGame("win");
+          return;
+        }
         document.getElementById(`letter_${i}`).innerText =
           inputLetter.toUpperCase();
       }
@@ -83,9 +93,12 @@ const stopGame = (status) => {
   document.getElementById("game").innerHTML +=
     `<p>The word was: <span class="result">${word}</span></p><button id="play-again"
     class="button-primary px-5 py-2 mt-3">Play again</button>`;
+  document.getElementById("play-again").onclick = startGame;
 };
 
 export const startGame = () => {
+  triesLeft = 10;
+  winCount = 0;
   const bigLogo = document.getElementById("logo");
   if (bigLogo) bigLogo.style.display = "none";
   logoH1.classList.add("logo-sm");
