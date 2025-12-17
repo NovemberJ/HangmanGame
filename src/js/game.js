@@ -125,4 +125,9 @@ export const startGame = () => {
   gameDiv.prepend(hangmanImg);
   gameDiv.prepend(logoH1);
   gameDiv.appendChild(keyboardDiv);
+
+  gameDiv.insertAdjacentHTML(
+    "beforeend",
+    "<button id='quit' class='button-secondary px-2 py-1 mt-4'>Quit</button>",
+  );
 };
