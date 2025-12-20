@@ -78,6 +78,7 @@ const stopGame = (status) => {
   document.getElementById("placeholders").remove();
   document.getElementById("tries").remove();
   document.getElementById("keyboard").remove();
+  document.getElementById("quit").remove();
 
   const word = sessionStorage.getItem("word");
 
@@ -88,11 +89,13 @@ const stopGame = (status) => {
   } else if (status === "lose") {
     document.getElementById("game").innerHTML +=
       "<h2 class='result-header lose'>You lost :(</h2>";
+  } else if (status === "quit") {
+    // logoH1.classList.remove("logo-sm"); дебажить этот момент
+    document.getElementById("hangman-img").remove();
   }
-
   document.getElementById("game").innerHTML +=
     `<p>The word was: <span class="result">${word}</span></p><button id="play-again"
-    class="button-primary px-5 py-2 mt-3">Play again</button>`;
+    class="button-primary px-5 py-2 mt-5">Play again</button>`;
   document.getElementById("play-again").onclick = startGame;
 };
 
@@ -130,4 +133,5 @@ export const startGame = () => {
     "beforeend",
     "<button id='quit' class='button-secondary px-2 py-1 mt-4'>Quit</button>",
   );
+  document.getElementById("quit").onclick = () => stopGame("quit");
 };
