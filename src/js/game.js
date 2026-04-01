@@ -85,17 +85,25 @@ const stopGame = (status) => {
   if (status === "win") {
     document.getElementById("hangman-img").src = "images/hg-win.png";
     document.getElementById("game").innerHTML +=
-      "<h2 class='result-header win'>You won!</h2>";
+      '<h2 class="text-2xl font-bold mt-4 text-lime-600">You won!</h2>';
   } else if (status === "lose") {
     document.getElementById("game").innerHTML +=
-      "<h2 class='result-header lose'>You lost :(</h2>";
+      '<h2 class="text-2xl font-bold mt-4 text-red-600">You lost :(</h2>';
   } else if (status === "quit") {
-    // logoH1.classList.remove("logo-sm"); дебажить этот момент
+    logoH1.className = "text-2xl sm:text-4xl md:text-5xl font-bold";
     document.getElementById("hangman-img").remove();
   }
+
   document.getElementById("game").innerHTML +=
-    `<p>The word was: <span class="result">${word}</span></p><button id="play-again"
-    class="button-primary px-5 py-2 mt-5">Play again</button>`;
+    `<div class="mt-4 flex flex-col items-center gap-4">
+     <p class="text-lg">The word was: <span class="font-medium uppercase">${word}</span></p>
+     <button id="play-again" class="flex justify-center items-center bg-slate-200 dark:bg-indigo-500
+     enabled:hover:bg-slate-300 enabled:dark:hover:bg-indigo-600
+     rounded-md font-medium px-5 py-2 disabled:opacity-20 disabled:cursor-not-allowed">
+       Play again
+     </button>
+   </div>`;
+
   document.getElementById("play-again").onclick = startGame;
 };
 
@@ -104,7 +112,7 @@ export const startGame = () => {
   winCount = 0;
   const bigLogo = document.getElementById("logo");
   if (bigLogo) bigLogo.style.display = "none";
-  logoH1.classList.add("logo-sm");
+  logoH1.className = "text-xl sm:text-xl md:text-xl font-bold";
   logoH1.textContent = "[ HANGMAN GAME ]";
   const randomIndex = Math.floor(Math.random() * WORDS.length);
   const wordToGuess = WORDS[randomIndex];
@@ -133,5 +141,10 @@ export const startGame = () => {
     "beforeend",
     "<button id='quit' class='button-secondary px-2 py-1 mt-4'>Quit</button>",
   );
-  document.getElementById("quit").onclick = () => stopGame("quit");
+  document.getElementById("quit").onclick = () => {
+    const isSure = confirm("Are you sure you want to quit?");
+    if (isSure) {
+      stopGame("quit");
+    }
+  };
 };
